@@ -1,6 +1,6 @@
 import random
 
-from solution.battleship.convert import CellConverter
+from battleship.convert import CellConverter
 
 class Game:
     """ Game class for performing game simulations.
@@ -20,7 +20,9 @@ class Game:
         """
         self.player1 = player1
         self.player2 = player2
-        
+
+        self.result = 0
+
         self.converter = CellConverter((player1.board.width, 
                                         player1.board.height))
     
@@ -50,7 +52,7 @@ class Game:
                     f"at position {self.converter.to_str(target_cell)}")
                 
                 # Opponent gives outcome
-                is_ship_hit, has_ship_sunk  = opponent.board.is_attacked_at(
+                is_ship_hit, has_ship_sunk = opponent.board.is_attacked_at(
                                                   target_cell)
 
                 # Game manager announces outcome
@@ -136,5 +138,9 @@ class Game:
         self._print_divider(newlines=1)
         if self.player1.has_lost():
             print(f"--- {self.player2} WINS THE GAME ---")
+            if "Bob (Automatic)" == self.player2.name:
+                self.result = 1
         else:
             print(f"--- {self.player1} WINS THE GAME ---")
+            if "Bob (Automatic)" == self.player1.name:
+                self.result = 1

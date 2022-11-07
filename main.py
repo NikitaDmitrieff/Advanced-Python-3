@@ -20,6 +20,17 @@ if __name__ == '__main__':
             index = int(sys.argv[1])
         except ValueError:
             index = 0
-            
-    simulation = simulations[index]
-    simulation.run()
+
+    # Run multiple games at once to better assess the AI's performance
+    results = 0
+    total_plays = 10 ** 4
+
+    for play in range(total_plays):
+        simulation = simulations[index]
+        if index == 4:
+            results += simulation.run()
+        else:
+            simulation.run()
+
+    print(f"BOB WON {results * 100 / total_plays}% OF THE TIME")
+

@@ -19,8 +19,8 @@ class ManualVsManualSimulation:
             Ship(start=(5, 8), end=(9, 8)),  # length = 5
             Ship(start=(5, 4), end=(8, 4)),  # length = 4
             Ship(start=(3, 1), end=(5, 1)),  # length = 3
-            ShipFactory.create_ship_from_str(start="F10", end="G10"), # Another way of creating a Ship
-            ShipFactory.create_ship_from_str(start="A4", end="A4"), # Another way of creating a Ship
+            ShipFactory.create_ship_from_str(start="F10", end="G10"),  # Another way of creating a Ship
+            ShipFactory.create_ship_from_str(start="A4", end="A4"),  # Another way of creating a Ship
         ]
 
         # Creating their boards
@@ -97,6 +97,7 @@ class RandomVsAutomaticSimulation:
         # Creating and launching the game
         game = Game(player1=alice, player2=bob)
         game.play()
+        return game.result
 
 
 class AutomaticVsAutomaticSimulation:

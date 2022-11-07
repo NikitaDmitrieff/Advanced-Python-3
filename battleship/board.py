@@ -133,7 +133,7 @@ class Board:
             for other_ship in check_ships:
                 ships_are_too_close = ship.is_near_ship(other_ship)
                 if ships_are_too_close:  # ship and other_ship are too close
-                    break
+                    return ships_are_too_close
 
         return ships_are_too_close
 

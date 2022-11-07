@@ -330,13 +330,22 @@ class ShipFactory:
 
             for ship_nb in range(number_of_ships):
 
+                # Prevents an infinite loop from happening when an impossible configuration of
+                # ships is generated which would not give a single valid space for the last
+                # ship to be generated
                 number_of_iterations = 0
+                max_iterations = 10 ** 3
 
+                # Generate a new ship with length ship_length and valid coordinates
                 while not(self.check_coordinates(ships, ship_to_test)):
+
                     start, end = self.generate_random_coordinates(ship_length)
                     ship_to_test = Ship(start, end, board_width=self.board_size[0], board_height=self.board_size[1])
                     number_of_iterations += 1
-                    if number_of_iterations > 10 ** 4:
+
+                    # Function is stuck in infinite loop, resets the ships by calling
+                    # the generate_ships() method again
+                    if number_of_iterations > max_iterations:
                         ships = self.generate_ships()
                         return ships
 
@@ -361,6 +370,8 @@ class ShipFactory:
         if not self.is_ship_in_bound(ship_to_test):
             return False
 
+        # Check that the ship is not overlapping with any other ship
+        # Check that the ship is not near any other ship
         if len(ships) > 0:
 
             for ship in ships:
@@ -425,6 +436,7 @@ class ShipFactory:
                 the ending cell coordinates of the Ship on the board
         """
 
+        # Choose between vertical (1) and horizontal (0)
         condition_vertical = random.randint(0, 1)
 
         if condition_vertical:  # X is fixed, Y is changing

@@ -45,7 +45,7 @@ class Player:
         raise NotImplementedError
 
     def receive_result(self, is_ship_hit, has_ship_sunk):
-        """ Receive results of latest attack.
+        """ Receive results of the latest attack.
         
         Player receives notification on the outcome of the latest attack by the 
         player, on whether the opponent's ship is hit, and whether it has been 
@@ -299,9 +299,9 @@ class AutomaticPlayer(Player):
         # Find the start and end of the 'hit' parts of the ship
         start, end = self.find_start_and_end(cell)
 
-        if start[0] == end[0]: # Ship is vertical
+        if start[0] == end[0]:  # Ship is vertical
             possible_cells = ((start[0], start[1] - 1), (end[0], end[1] + 1))
-        else: # Ship is horizontal
+        else:  # Ship is horizontal
             possible_cells = ((start[0] - 1, start[1]), (end[0] + 1, end[1]))
 
         # Choose between one cell before the start cell or one cell after the end cell
@@ -382,7 +382,7 @@ class AutomaticPlayer(Player):
                 thanks to successful hits
 
         Args:
-            cell (tuple[(int, int)]): coordinates of a cell to find the start
+            cell (tuple[int, int]): coordinates of a cell to find the start
                 and end coordinates of the ship for
 
         Returns:
@@ -440,9 +440,9 @@ class AutomaticPlayer(Player):
         """ Recursive function which gathers the nearby hit cells for a given cell
 
         Args:
-            cell (tuple[(int, int)]): coordinates of a cell to find the nearby successful
+            cell (tuple[int, int]): coordinates of a cell to find the nearby successful
                 hit cells for
-            except_cell (tuple[(int, int)]): coordinates of a cell to omit in the search
+            except_cell (tuple[int, int]): coordinates of a cell to omit in the search
                 for nearby successful hit cells
 
         Returns:
@@ -466,7 +466,7 @@ class AutomaticPlayer(Player):
     def get_neighbours(self, cell, cell_hunt=False):
         """
         Args:
-            cell (tuple[(int, int)]): coordinates of a cell to gather all
+            cell (tuple[int, int]): coordinates of a cell to gather all
                 the neighbours for
             cell_hunt (bool): True if we are searching neighbours in the
                 context of hunt, False otherwise
@@ -512,7 +512,7 @@ class AutomaticPlayer(Player):
         """ Checks if a cell is within bound
 
         Args:
-            cell (tuple[(int, int)]): coordinates of a cell to check if it
+            cell (tuple[int, int]): coordinates of a cell to check if it
                 is in bound for
 
         Returns:

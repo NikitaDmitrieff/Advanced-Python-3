@@ -63,8 +63,8 @@ def test_are_ships_too_close():
         Ship(start=(8, 3), end=(8, 3)),  # length = 1
     ]
     board = Board(ships=ships)
-    output = board.are_ships_within_bounds()
-    assert output == True
+    output = board.are_ships_too_close()
+    assert not output
 
     # Too close
     try:
@@ -76,9 +76,10 @@ def test_are_ships_too_close():
             Ship(start=(8, 3), end=(8, 3)),  # length = 1 And this ship are too close
         ]
         board = Board(ships=ships)
-        output = board.are_ships_within_bounds()
+        output = board.are_ships_too_close()
+        assert not output
         condition = False
-    except ValueError:
+    except KeyError:
         condition = True
     assert condition
 

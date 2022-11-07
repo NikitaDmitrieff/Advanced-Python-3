@@ -54,7 +54,6 @@ class Board:
         if should_validate:
             self.validate_ships()
 
-
     def validate_ships(self):
         """ Validate the ship arrangements on the board.
         
@@ -127,13 +126,14 @@ class Board:
                 otherwise
         """
         ships_are_too_close = False
+        check_ships = self.ships.copy()
 
         for ship in self.ships:
-            for other_ship in self.ships:
-                if other_ship != ship:
-                    ships_are_too_close = ship.is_near_ship(other_ship)
-                    if ships_are_too_close:  # ship and other_ship are too close
-                        break
+            check_ships.remove(ship)
+            for other_ship in check_ships:
+                ships_are_too_close = ship.is_near_ship(other_ship)
+                if ships_are_too_close:  # ship and other_ship are too close
+                    break
 
         return ships_are_too_close
 
